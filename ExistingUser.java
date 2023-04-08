@@ -106,7 +106,7 @@ public class ExistingUser {
 
     private void loadData() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("data.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("data/data.csv"));
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] record = line.split(",");
@@ -118,7 +118,7 @@ public class ExistingUser {
             JOptionPane.showMessageDialog(null, "Data file not found or cannot be read. Creating a new data file.");
             try {
 
-                FileWriter writer = new FileWriter("data.csv");
+                FileWriter writer = new FileWriter("data/data.csv");
                 writer.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
