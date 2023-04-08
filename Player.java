@@ -1,6 +1,4 @@
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Objects;
 
 public class Player {
     public static final int NO_ELEMENTS = 0;
@@ -8,6 +6,7 @@ public class Player {
     public static final int HAS_MIDDLE = 2;
     public static final int HAS_TOP = 3;
     private String name;
+    private String password;
     private int score;
     private int mpStatus;
     private int highScore;
@@ -19,19 +18,15 @@ public class Player {
      */
 
     public Player(String data) {
-        //data = "hana,46"
+        //data = "hana,password,46"
         String[] playerData = data.split(",");
 
 
         this.name = playerData[0];
-        score = 0;
-        highScore = 0;
-        if (playerData.length == 2) {
-            Integer hs = Utils.checkValidInt(playerData[1]);
-            if (hs != null)
-                highScore = hs;
-        }
-        mpStatus = 0;
+        this.password = playerData[1];
+        this.highScore = Integer.parseInt(playerData[2]);
+        this.score = 0;
+        this.mpStatus = 0;
     }
 
     public int getScore() {
@@ -41,6 +36,11 @@ public class Player {
     public String getName() {
         return name;
     }
+
+    public boolean validatePassword(String password) {
+        return Objects.equals(password, this.password);
+    }
+
 
     public void incScore(int score) {
         this.score += score;
@@ -76,7 +76,7 @@ public class Player {
     }
 
     public String toCSVString() {
-        return name + "," + highScore;
+        return name + "," + password + "," + highScore;
     }
     @Override
     public String toString() {

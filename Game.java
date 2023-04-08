@@ -131,4 +131,14 @@ public class Game {
             }
         }
     }
+
+    public Integer[]  getDiceListGui(){
+        Dice dice = new Dice();
+        return dice.getDiceList();
+    }
+
+    public Player playTurnGui(Player player, Integer[] diceList) {
+        checkMachuPichu(diceList,player);
+        return(player);
+    }
 }

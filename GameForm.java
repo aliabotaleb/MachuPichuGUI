@@ -14,23 +14,26 @@ public class GameForm {
     private JButton saveGameButton;
     private JTextArea highScoreTextArea;
 
+    private Player player;
+
    public GameForm(Player player)
     {
+        this.player = player;
+
+        Game game = new Game();
          // Add ActionListener to the rollDiceButton
          rollDiceButton.addActionListener(new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                // Roll the dice
-//               Dice dice = new Dice();
-//               Integer[] diceList = dice.getDiceList();
-//               String word = Game.checkMachuPichu(diceList,player);
-//                darrenTextArea.setText(word);
-//                score.setText(String.valueOf(player.getScore()));
-//                diceRollLabel1.setText(String.valueOf(diceRoll));
-//                // Display the dice roll in the text area
-//                darrenTextArea.append(String.valueOf(diceRoll) + " ");
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    handleRollDice(game);
                 }
             });
+    }
+
+    public void handleRollDice(Game game)
+    {
+        Integer[] diceList = game.getDiceListGui();
+        game.playTurnGui(this.player, diceList);
     }
 
     public void setVisible(boolean visible) {

@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class NewUser {
     private JPanel panel1;
@@ -33,27 +34,7 @@ public class NewUser {
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               // make username small case
-                String username = textField1.getText();
-                char[] password = passwordField.getPassword();
-
-                boolean isValidUsername = validateUsername(username);
-                boolean isValidPassword = validatePassword(password);
-                if (isValidUsername && isValidPassword) {
-                    usernamesList.add(username);
-                    // Write the data to csv
-                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_FILE, true))) {
-                        writer.write(username + "," + String.valueOf(password) + ",0");
-                        writer.newLine();
-                    } catch (IOException error) {
-                        error.printStackTrace();
-                    }
-
-                    JOptionPane.showMessageDialog(null, "User created successfully!");
-                    // Launch the game form
-                    GameForm gameForm = new GameForm(new Player("ali,0"));
-                    gameForm.setVisible(true);
-                }
+               handleEnterButton();
             }
 
         });
@@ -67,6 +48,33 @@ public class NewUser {
             }
         });
 
+    }
+
+    private void handleEnterButton() {
+        // make username small case
+        String username = textField1.getText();
+        String password = new String(passwordField.getPassword());
+
+        boolean isValidUsername = validateUsername(username);
+        boolean isValidPassword = validatePassword(password);
+        if (isValidUsername && isValidPassword) {
+            ArrayList<Player> playersArrayList = Players.readPlayerDataFromFile();
+            // loop over each player in playersArrayList and check if username is already taken
+            boolean playerExists =  Players.checkNameExists(playersArrayList, username);
+            if (playerExists) {
+                JOptionPane.showMessageDialog(null, "This username is already taken");
+                return;
+            }
+
+            // create new player
+            Player player = new Player(username + "," + password + ",0");
+
+            Players.writePlayerDataToFile(player, playersArrayList);
+            JOptionPane.showMessageDialog(null, "User created successfully!");
+            // Launch the game form
+            GameForm gameForm = new GameForm(player);
+            gameForm.setVisible(true);
+        }
     }
 
     // Read the data from csv
@@ -111,8 +119,8 @@ public class NewUser {
         return true;
     }
 
-    private boolean validatePassword(char[] password) {
-        if (password.length < 8) {
+    private boolean validatePassword(String password) {
+        if (password.length() < 8) {
             JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long");
             return false;
         }
@@ -121,12 +129,12 @@ public class NewUser {
         boolean containsNumber = false;
         boolean containsSpecialChar = false;
 
-        for (char c : password) {
-            if (Character.isUpperCase(c)) {
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isUpperCase(password.charAt(i))) {
                 containsUpperCase = true;
-            } else if (Character.isDigit(c)) {
+            } else if (Character.isDigit(password.charAt(i))) {
                 containsNumber = true;
-            } else if (!Character.isLetter(c) && !Character.isDigit(c)) {
+            } else if (!Character.isLetter(password.charAt(i)) && !Character.isDigit(password.charAt(i))) {
                 containsSpecialChar = true;
             }
         }

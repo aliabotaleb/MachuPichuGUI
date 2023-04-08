@@ -13,18 +13,23 @@ public class Players {
     public static ArrayList<Player> readPlayerDataFromFile() {
         ArrayList<Player> players = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(DATA_FILE))) {
-            String line = reader.readLine();
+        try {
+            try (BufferedReader reader = new BufferedReader(new FileReader(DATA_FILE))) {
+                String line = reader.readLine();
 
-            // loop over each line in DATA_FILE and append to players as new player
-            while (line != null) {
-                players.add(new Player(line));
-                // read next line
-                line = reader.readLine();
+                // loop over each line in DATA_FILE and append to players as new player
+                while (line != null) {
+                    players.add(new Player(line));
+                    // read next line
+                    line = reader.readLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+
         }
+
 
         return players;
     }
@@ -73,15 +78,15 @@ public class Players {
      * @param name    The name of the player to check for
      * @return The Player object with the given name if it exists in the list, or null if not found
      */
-    public static Player checkNameExists(ArrayList<Player> players, String name) {
+    public static boolean checkNameExists(ArrayList<Player> players, String name) {
         for (Player p : players) {
             // If given player exists in Array
             if (p.getName().equals(name)) {
-                return p;
+                return true;
             }
         }
 
-        return null;
+        return false;
     }
 
     /**

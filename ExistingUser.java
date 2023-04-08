@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ExistingUser {
     private JPanel panel;
@@ -34,13 +35,13 @@ public class ExistingUser {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String username = textField1.getText();
-                char[] password = passwordField1.getPassword();
+                String password = new String(passwordField1.getPassword());
 
-                boolean isValidUser = validateUser(username, password);
+                Player loggedPlayer = validateUser(username, password);
 
-                if (isValidUser) {
+                if (loggedPlayer != null) {
                     // Launch the game form
-                GameForm gameForm = new GameForm(new Player("ali,0"));
+                    GameForm gameForm = new GameForm(loggedPlayer);
                     gameForm.setVisible(true);
                 } else {
                     int option = JOptionPane.showConfirmDialog(null,
@@ -105,13 +106,17 @@ public class ExistingUser {
         frame.setVisible(true);
     }
 
-    private boolean validateUser(String username, char[] password) {
-        for (String[] record : data) {
-            if (record[0].equals(username) && record[1].equals(String.valueOf(password))) {
-                return true;
-            }
+    private Player validateUser(String username, String password) {
+        ArrayList<Player> playersArrayList = Players.readPlayerDataFromFile();
+        // loop over each player in playersArrayList and check if username is already taken
+        Player player =  Players.checkNameExists(playersArrayList, username);
+
+        if (player != null && player.validatePassword(password)) {
+            // check if password matches
+            return player;
         }
-        return false;
+
+        return null;
     }
 
     private void loadData() {
