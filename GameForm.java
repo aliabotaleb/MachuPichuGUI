@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class GameForm {
     private JPanel panel1;
@@ -8,11 +9,11 @@ public class GameForm {
     private JTextField textField1;
     private JButton rollDiceButton;
     private JButton newGameButton;
+    private JButton saveGameButton;
     private JLabel scoreLabelField;
     private JLabel statusLabelField;
     private JLabel highScoreLabelField;
     private JLabel userNameLabelField;
-    private JButton saveGameButton;
 
     private Player player;
 
@@ -21,11 +22,11 @@ public class GameForm {
    public GameForm(Player player)
     {
         this.player = player;
-        setUserNameTextArea(player.getName());
-        setHighScoreTextArea(String.valueOf(player.getHighScore()));
+        setUserNameLabelField(player.getName());
+        setHighScoreLabelField(String.valueOf(player.getHighScore()));
 
-        setGameStatusTextArea("Roll dice to start the game");
-        setScoreTextArea(String.valueOf(player.getScore()));
+        setGameStatusLabelField("Roll dice to start the game");
+        setScoreLabelField(String.valueOf(player.getScore()));
          // Add ActionListener to the rollDiceButton
          rollDiceButton.addActionListener(new ActionListener() {
                 @Override
@@ -33,36 +34,73 @@ public class GameForm {
                     handleRollDice();
                 }
          });
+
+        newGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleNewGame();
+            }
+        });
+
+        saveGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleSaveGame();
+            }
+        });
+
     }
 
     public void handleRollDice() {
         Integer[] diceList = dice.getDiceList();
-        textField1.setText(diceList[0] + " " + diceList[1] + " " + diceList[2] + " " + diceList[3] + " " + diceList[4]);
+        StringBuilder sb = new StringBuilder();
+        for (Integer i : diceList) {
+            sb.append(i.toString());
+        }
+        String concatenatedDiceList = sb.toString();
+
+        setTextField1(concatenatedDiceList);
 
         GameLogic.checkMachuPichu(diceList, this.player);
-        setGameStatusTextArea(player.getStatusStr());
+        setGameStatusLabelField(player.getStatusStr());
 
-        setScoreTextArea(String.valueOf(player.getScore()));
+        setScoreLabelField(String.valueOf(player.getScore()));
 
         if (player.getScore() > player.getHighScore()){
             player.setHighScore();
-            setHighScoreTextArea(String.valueOf(player.getHighScore()));
+            setHighScoreLabelField(String.valueOf(player.getHighScore()));
         }
     }
 
-    private void setGameStatusTextArea(String text) {
+    public void handleNewGame() {
+        player.resetScore();
+        setScoreLabelField(String.valueOf(player.getScore()));
+        setGameStatusLabelField("Roll dice to start the game");
+    }
+
+    public void handleSaveGame() {
+        ArrayList<Player> players = Players.readPlayerDataFromFile();
+
+        Players.writePlayerDataToFile(this.player, players);
+    }
+
+    private void setTextField1(String text) {
+        textField1.setText(text);
+    }
+
+    private void setGameStatusLabelField(String text) {
         statusLabelField.setText(text);
     }
 
-    private void setScoreTextArea(String text) {
+    private void setScoreLabelField(String text) {
         scoreLabelField.setText(text);
     }
 
-    private void setHighScoreTextArea(String text) {
+    private void setHighScoreLabelField(String text) {
         highScoreLabelField.setText(text);
     }
 
-    private void setUserNameTextArea(String text) {
+    private void setUserNameLabelField(String text) {
         userNameLabelField.setText(text);
     }
 

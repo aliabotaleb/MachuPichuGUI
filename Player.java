@@ -64,6 +64,11 @@ public class Player {
         }
     }
 
+    public void resetScore() {
+        score = 0;
+        mpStatus = 0;
+    }
+
     public String getStatusStr() {
         String status = "";
         switch (mpStatus) {

@@ -127,6 +127,7 @@ public class NewUser {
 
         boolean containsUpperCase = false;
         boolean containsNumber = false;
+        boolean containsComma = false;
         boolean containsSpecialChar = false;
 
         for (int i = 0; i < password.length(); i++) {
@@ -134,7 +135,9 @@ public class NewUser {
                 containsUpperCase = true;
             } else if (Character.isDigit(password.charAt(i))) {
                 containsNumber = true;
-            } else if (!Character.isLetter(password.charAt(i)) && !Character.isDigit(password.charAt(i))) {
+            } else if (password.charAt(i) == ',') {
+                containsComma = true;
+            }  else if (!Character.isLetter(password.charAt(i)) && !Character.isDigit(password.charAt(i))) {
                 containsSpecialChar = true;
             }
         }
@@ -146,6 +149,11 @@ public class NewUser {
 
         if (!containsNumber) {
             JOptionPane.showMessageDialog(null, "Password must contain a numerical character");
+            return false;
+        }
+
+        if (containsComma) {
+            JOptionPane.showMessageDialog(null, "Password must not contain a comma");
             return false;
         }
 
