@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class NewUser {
     private JPanel panel1;
@@ -18,6 +17,9 @@ public class NewUser {
     private ArrayList<String> usernamesList = new ArrayList<>();
 
     public NewUser() {
+        // populate usernamesList from data/data.csv
+        usernamesList = readPlayerDataFromFile();
+
         // Add ActionListener to the showPasswordButton
         showPasswordCheckBox.addActionListener(new ActionListener() {
             @Override
@@ -30,14 +32,22 @@ public class NewUser {
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+               // make username small case
                 String username = textField1.getText();
                 char[] password = passwordField.getPassword();
 
                 boolean isValidUsername = validateUsername(username);
                 boolean isValidPassword = validatePassword(password);
-
                 if (isValidUsername && isValidPassword) {
                     usernamesList.add(username);
+                    // Write the data to csv
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/data.csv", true))) {
+                        writer.write(username + "," + String.valueOf(password) + ",0");
+                        writer.newLine();
+                    } catch (IOException error) {
+                        error.printStackTrace();
+                    }
+
                     JOptionPane.showMessageDialog(null, "User created successfully!");
                     // Launch the game form
                     GameForm gameForm = new GameForm();
@@ -58,8 +68,42 @@ public class NewUser {
 
     }
 
+    // Read the data from csv
+    private ArrayList<String> readPlayerDataFromFile() {
+        ArrayList<String> usernames = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("data/data.csv"))) {
+            String line = reader.readLine();
+
+            // loop over each line in DATA_FILE and append to players as new player
+            while (line != null) {
+                String[] data = line.split(",");
+                usernames.add(data[0]);
+                // read next line
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return usernames;
+    }
     private boolean validateUsername(String username) {
-        if (usernamesList.contains(username)) {
+        System.out.println(usernamesList);
+        // ignore capitalization
+        // make minimum length 3
+
+        if (username.length() < 3) {
+            JOptionPane.showMessageDialog(null, "Username must be at least 3 characters long");
+            return false;
+        }
+
+        // make usernamesList small case
+        for (int i = 0; i < usernamesList.size(); i++) {
+            usernamesList.set(i, usernamesList.get(i).toLowerCase());
+        }
+         String usernameSmallCase = username.toLowerCase();
+        if (usernamesList.contains(usernameSmallCase)) {
             JOptionPane.showMessageDialog(null, "This username is already taken");
             return false;
         }
