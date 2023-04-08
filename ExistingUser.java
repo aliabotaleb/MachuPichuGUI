@@ -97,6 +97,14 @@ public class ExistingUser {
         frame.setVisible(true);
     }
 
+    public void setVisible(boolean visible) {
+        JFrame frame = new JFrame("Existing User");
+        frame.setContentPane(this.panel);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     private boolean validateUser(String username, char[] password) {
         for (String[] record : data) {
             if (record[0].equals(username) && record[1].equals(String.valueOf(password))) {

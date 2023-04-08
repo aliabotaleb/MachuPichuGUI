@@ -26,13 +26,15 @@ public class MainMenu {
     }
 
     private void handleNewUserButtonClick() {
-        // Implement your logic for handling new user button click here
-        System.out.println("New user button clicked");
+        //make it go to new user when clicked
+        NewUser newUser = new NewUser();
+        newUser.setVisible(true);
     }
 
     private void handleExistingUserButtonClick() {
-        // Implement your logic for handling existing user button click here
-        System.out.println("Existing user button clicked");
+        //make it go to existing user when clicked
+        ExistingUser existingUser = new ExistingUser();
+//        existingUser.setVisible(true);
     }
 
     public static void main(String[] args) {
