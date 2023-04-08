@@ -7,12 +7,12 @@ public class GameForm {
     private JLabel diceRollLabel1;
     private JTextField textField1;
     private JButton rollDiceButton;
-    private JTextArea darrenTextArea;
-    private JTextArea gameStatusTextArea;
-    private JTextArea scoreTextArea;
     private JButton newGameButton;
+    private JLabel scoreLabelField;
+    private JLabel statusLabelField;
+    private JLabel highScoreLabelField;
+    private JLabel userNameLabelField;
     private JButton saveGameButton;
-    private JTextArea highScoreTextArea;
 
     private Player player;
 
@@ -21,19 +21,49 @@ public class GameForm {
    public GameForm(Player player)
     {
         this.player = player;
+        setUserNameTextArea(player.getName());
+        setHighScoreTextArea(String.valueOf(player.getHighScore()));
+
+        setGameStatusTextArea("Roll dice to start the game");
+        setScoreTextArea(String.valueOf(player.getScore()));
          // Add ActionListener to the rollDiceButton
          rollDiceButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     handleRollDice();
                 }
-            });
+         });
     }
 
-    public void handleRollDice()
-    {
+    public void handleRollDice() {
         Integer[] diceList = dice.getDiceList();
+        textField1.setText(diceList[0] + " " + diceList[1] + " " + diceList[2] + " " + diceList[3] + " " + diceList[4]);
+
         GameLogic.checkMachuPichu(diceList, this.player);
+        setGameStatusTextArea(player.getStatusStr());
+
+        setScoreTextArea(String.valueOf(player.getScore()));
+
+        if (player.getScore() > player.getHighScore()){
+            player.setHighScore();
+            setHighScoreTextArea(String.valueOf(player.getHighScore()));
+        }
+    }
+
+    private void setGameStatusTextArea(String text) {
+        statusLabelField.setText(text);
+    }
+
+    private void setScoreTextArea(String text) {
+        scoreLabelField.setText(text);
+    }
+
+    private void setHighScoreTextArea(String text) {
+        highScoreLabelField.setText(text);
+    }
+
+    private void setUserNameTextArea(String text) {
+        userNameLabelField.setText(text);
     }
 
     public void setVisible(boolean visible) {

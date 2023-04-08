@@ -64,7 +64,7 @@ public class Player {
         }
     }
 
-    private String getStatusStr() {
+    public String getStatusStr() {
         String status = "";
         switch (mpStatus) {
             case NO_ELEMENTS -> status = "No elements";
