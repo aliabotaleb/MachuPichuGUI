@@ -12,6 +12,7 @@ public class NewUser {
     private JButton clearButton;
     private JCheckBox showPasswordCheckBox;
 
+    private static final String DATA_FILE = "data/data.csv";
     private boolean isPasswordVisible;
 
     private ArrayList<String> usernamesList = new ArrayList<>();
@@ -41,7 +42,7 @@ public class NewUser {
                 if (isValidUsername && isValidPassword) {
                     usernamesList.add(username);
                     // Write the data to csv
-                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/data.csv", true))) {
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_FILE, true))) {
                         writer.write(username + "," + String.valueOf(password) + ",0");
                         writer.newLine();
                     } catch (IOException error) {
@@ -72,7 +73,7 @@ public class NewUser {
     private ArrayList<String> readPlayerDataFromFile() {
         ArrayList<String> usernames = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("data/data.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(DATA_FILE))) {
             String line = reader.readLine();
 
             // loop over each line in DATA_FILE and append to players as new player

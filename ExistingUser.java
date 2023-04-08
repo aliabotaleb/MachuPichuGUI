@@ -14,6 +14,8 @@ public class ExistingUser {
     private JLabel label2;
 
     private ArrayList<String[]> data = new ArrayList<>();
+
+    private static final String DATA_FILE = "data/data.csv";
     private boolean isPasswordVisible;
 
     public ExistingUser() {
@@ -106,7 +108,7 @@ public class ExistingUser {
 
     private void loadData() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("data/data.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(DATA_FILE));
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] record = line.split(",");
@@ -118,7 +120,7 @@ public class ExistingUser {
             JOptionPane.showMessageDialog(null, "Data file not found or cannot be read. Creating a new data file.");
             try {
 
-                FileWriter writer = new FileWriter("data/data.csv");
+                FileWriter writer = new FileWriter(DATA_FILE);
                 writer.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
