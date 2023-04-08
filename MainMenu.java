@@ -8,7 +8,9 @@ public class MainMenu {
     private JButton existingUserButton;
     private JLabel mainMenulabel;
 
-
+    /**
+     * constructor for main menu
+     */
     public MainMenu() {
         newUserButton.addActionListener(new ActionListener() {
             @Override
@@ -17,6 +19,9 @@ public class MainMenu {
             }
         });
 
+        /**
+         * Add ActionListener to the existingUserButton
+         */
         existingUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -25,18 +30,28 @@ public class MainMenu {
         });
     }
 
+    /**
+     * handle new user button click
+     */
     private void handleNewUserButtonClick() {
         //make it go to new user when clicked
         NewUser newUser = new NewUser();
         newUser.setVisible(true);
     }
 
+    /**
+     * handle existing user button click
+     */
     private void handleExistingUserButtonClick() {
         //make it go to existing user when clicked
         ExistingUser existingUser = new ExistingUser();
 //        existingUser.setVisible(true);
     }
 
+        /**
+         * main method
+         * @param args
+         */
     public static void main(String[] args) {
         JFrame frame = new JFrame("Main Menu");
         frame.setContentPane(new MainMenu().mainPanel);
@@ -45,6 +60,10 @@ public class MainMenu {
         frame.setVisible(true);
     }
 
+        /**
+         * set visible
+         * @param visible
+         */
     public void setVisible(boolean visible) {
         JFrame frame = new JFrame("Main Menu");
         frame.setContentPane(this.mainPanel);

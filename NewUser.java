@@ -13,16 +13,28 @@ public class NewUser {
     private JButton clearButton;
     private JCheckBox showPasswordCheckBox;
 
+    /**
+     * data file path
+     */
     private static final String DATA_FILE = "data/data.csv";
     private boolean isPasswordVisible;
 
+    /**
+     * list of usernames
+     */
     private ArrayList<String> usernamesList = new ArrayList<>();
 
+    /**
+     * constructor for new user
+     */
     public NewUser() {
         // populate usernamesList from data/data.csv
         usernamesList = readPlayerDataFromFile();
 
-        // Add ActionListener to the showPasswordButton
+        /**
+         * Add ItemListener to the showPasswordCheckBox
+         */
+        //
         showPasswordCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -30,6 +42,9 @@ public class NewUser {
             }
         });
 
+        /**
+         * Add ActionListener to the enterButton.
+         */
         // Add ActionListener to the enterButton
         enterButton.addActionListener(new ActionListener() {
             @Override
@@ -39,6 +54,9 @@ public class NewUser {
 
         });
 
+        /**
+         * Add ActionListener to the clearButton.
+         */
         // Add ActionListener to the clearButton
         clearButton.addActionListener(new ActionListener() {
             @Override
@@ -49,7 +67,12 @@ public class NewUser {
         });
 
     }
-
+        /**
+         * When the enterButton is clicked, the username and password should be validated.
+         * If the username and password are valid, the game form should be launched.
+         * If the username and password are invalid, a dialog box should be displayed
+         * asking the user if they want to create a new user.
+         */
     private void handleEnterButton() {
         // make username small case
         String username = textField1.getText();
@@ -66,6 +89,9 @@ public class NewUser {
                 return;
             }
 
+            /**
+             * If the username and password are valid, the game form should be launched.
+             */
             // create new player
             Player player = new Player(username + "," + password + ",0");
 
@@ -77,7 +103,10 @@ public class NewUser {
         }
     }
 
-    // Read the data from csv
+        /**
+         * Read the data from csv
+         * @return usernames
+         */
     private ArrayList<String> readPlayerDataFromFile() {
         ArrayList<String> usernames = new ArrayList<>();
 
@@ -97,6 +126,12 @@ public class NewUser {
 
         return usernames;
     }
+
+        /**
+         * Validate the username
+         * @param username
+         * @return true if valid
+         */
     private boolean validateUsername(String username) {
         System.out.println(usernamesList);
         // ignore capitalization
@@ -118,7 +153,11 @@ public class NewUser {
         }
         return true;
     }
-
+    /**
+         * Validate the password
+         * @param password
+         * @return true if valid
+         */
     private boolean validatePassword(String password) {
         if (password.length() < 8) {
             JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long");
@@ -165,6 +204,9 @@ public class NewUser {
         return true;
     }
 
+    /**
+     * Toggle the visibility of the password
+     */
     private void togglePasswordVisibility() {
         if (!isPasswordVisible) {
             passwordField.setEchoChar((char) 0);
@@ -175,10 +217,17 @@ public class NewUser {
         }
     }
 
+    /**
+     * Get the main panel
+     * @return panel1
+     */
     public JPanel getMainPanel() {
         return panel1;
     }
 
+    /**
+     * Launch the form for main
+     */
     public static void main(String[] args) {
         // Create a JFrame, set its content pane to the panel1, and display the form
         JFrame frame = new JFrame("New User");
@@ -188,7 +237,9 @@ public class NewUser {
         frame.setVisible(true);
     }
 
-
+       /**
+     * Launch the form  for new user
+     */
     public void setVisible(boolean visible) {
         JFrame frame = new JFrame("New User");
         frame.setContentPane(this.panel1);

@@ -17,7 +17,10 @@ public class GameForm {
     private Player player;
 
     private Dice dice = new Dice();
-
+    /**
+     * constructor for game form
+     * @param player
+     */
    public GameForm(Player player)
     {
         this.player = player;
@@ -33,7 +36,10 @@ public class GameForm {
                     handleRollDice();
                 }
          });
-
+        // Add ActionListener to the newGameButton
+        /**
+         * Add ActionListener to the saveGameButton
+         */
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,7 +55,9 @@ public class GameForm {
         });
 
     }
-
+    /**
+     * handle roll dice button
+     */
     public void handleRollDice() {
         Integer[] diceList = dice.getDiceList();
         StringBuilder sb = new StringBuilder();
@@ -70,40 +78,62 @@ public class GameForm {
             setHighScoreLabelField(String.valueOf(player.getHighScore()));
         }
     }
-
+    /**
+     * handle new game button
+     */
     public void handleNewGame() {
         player.resetScore();
         setScoreLabelField(String.valueOf(player.getScore()));
         setGameStatusLabelField("Waiting for game to start");
         setrollsLabelField("Roll dice to start the game");
     }
-
+    /**
+     * handle save game button
+     */
     public void handleSaveGame() {
         ArrayList<Player> players = Players.readPlayerDataFromFile();
 
         Players.writePlayerDataToFile(this.player, players);
     }
-
+    /**
+     * set rolls label field
+     * @param text
+     */
     private void setrollsLabelField(String text) {
         rollsLabelField.setText(text);
     }
-
+    /**
+     * set game status label field
+     * @param text
+     */
     private void setGameStatusLabelField(String text) {
         statusLabelField.setText(text);
     }
-
+    /**
+     * set score label field
+     * @param text
+     */
     private void setScoreLabelField(String text) {
         scoreLabelField.setText(text);
     }
-
+    /**
+     * set high score label field
+     * @param text
+     */
     private void setHighScoreLabelField(String text) {
         highScoreLabelField.setText(text);
     }
-
+    /**
+     * set user name label field
+     * @param text
+     */
     private void setUserNameLabelField(String text) {
         userNameLabelField.setText(text);
     }
-
+    /**
+     * set visible
+     * @param visible
+     */
     public void setVisible(boolean visible) {
         JFrame frame = new JFrame("Game Form");
         frame.setContentPane(this.panel1);

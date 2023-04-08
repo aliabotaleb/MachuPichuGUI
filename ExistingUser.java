@@ -19,18 +19,25 @@ public class ExistingUser {
     private static final String DATA_FILE = "data/data.csv";
     private boolean isPasswordVisible;
 
+    /**
+     * constructor for existing user
+     */
     public ExistingUser() {
         // Load the data from the file
         loadData();
 
-        // Add ItemListener to the showPasswordCheckBox
+        /**
+         * Add ItemListener to the showPasswordCheckBox
+         */
         showPasswordCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 togglePasswordVisibility();
             }
         });
 
-        // Add ActionListener to the enterButton
+        /**
+         * Add ActionListener to the enterButton.
+         */
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,7 +63,9 @@ public class ExistingUser {
             }
         });
 
-        // Add ActionListener to the clearButton
+        /**
+         * Add ActionListener to the clearButton.
+         */
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,9 +92,9 @@ public class ExistingUser {
         panel.add(clearButton);
         panel.add(showPasswordCheckBox);
 
-
-
-
+        /**
+         * Add the components to the panel
+         */
         // Create a JFrame and add the JPanel to it
         JFrame frame = new JFrame("Existing User");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -97,7 +106,10 @@ public class ExistingUser {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
+        /**
+         * Set the visibility of the form
+         * @param visible
+         */
     public void setVisible(boolean visible) {
         JFrame frame = new JFrame("Existing User");
         frame.setContentPane(this.panel);
@@ -105,7 +117,12 @@ public class ExistingUser {
         frame.pack();
         frame.setVisible(visible);
     }
-
+    /**
+     * Validate the username and password
+     * @param username
+     * @param password
+     * @return
+     */
     private Player validateUser(String username, String password) {
         ArrayList<Player> playersArrayList = Players.readPlayerDataFromFile();
         // loop over each player in playersArrayList and check if username is already taken
@@ -118,7 +135,9 @@ public class ExistingUser {
 
         return null;
     }
-
+    /**
+     * Load the data from the file
+     */
     private void loadData() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(DATA_FILE));
@@ -140,7 +159,9 @@ public class ExistingUser {
             }
         }
     }
-
+    /**
+     * Toggle the visibility of the password
+     */
     private void togglePasswordVisibility() {
         if (!isPasswordVisible) {
             passwordField1.setEchoChar((char) 0);
@@ -151,7 +172,10 @@ public class ExistingUser {
             passwordLabel1 = new JLabel("Password:");
         }
     }
-
+    /**
+     * Main method
+     * @param args
+     */
     public static void main(String[] args) {
         ExistingUser existingUser = new ExistingUser();
     }
