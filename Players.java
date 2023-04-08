@@ -78,15 +78,15 @@ public class Players {
      * @param name    The name of the player to check for
      * @return The Player object with the given name if it exists in the list, or null if not found
      */
-    public static boolean checkNameExists(ArrayList<Player> players, String name) {
+    public static Player checkNameExists(ArrayList<Player> players, String name) {
         for (Player p : players) {
             // If given player exists in Array
             if (p.getName().equals(name)) {
-                return true;
+                return p;
             }
         }
 
-        return false;
+        return null;
     }
 
     /**

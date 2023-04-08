@@ -60,8 +60,8 @@ public class NewUser {
         if (isValidUsername && isValidPassword) {
             ArrayList<Player> playersArrayList = Players.readPlayerDataFromFile();
             // loop over each player in playersArrayList and check if username is already taken
-            boolean playerExists =  Players.checkNameExists(playersArrayList, username);
-            if (playerExists) {
+            Player playerExists =  Players.checkNameExists(playersArrayList, username);
+            if (playerExists != null) {
                 JOptionPane.showMessageDialog(null, "This username is already taken");
                 return;
             }

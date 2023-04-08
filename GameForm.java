@@ -16,24 +16,24 @@ public class GameForm {
 
     private Player player;
 
+    private Dice dice = new Dice();
+
    public GameForm(Player player)
     {
         this.player = player;
-
-        Game game = new Game();
          // Add ActionListener to the rollDiceButton
          rollDiceButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    handleRollDice(game);
+                    handleRollDice();
                 }
             });
     }
 
-    public void handleRollDice(Game game)
+    public void handleRollDice()
     {
-        Integer[] diceList = game.getDiceListGui();
-        game.playTurnGui(this.player, diceList);
+        Integer[] diceList = dice.getDiceList();
+        GameLogic.checkMachuPichu(diceList, this.player);
     }
 
     public void setVisible(boolean visible) {
