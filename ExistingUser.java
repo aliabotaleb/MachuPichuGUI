@@ -103,7 +103,7 @@ public class ExistingUser {
         frame.setContentPane(this.panel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
-        frame.setVisible(true);
+        frame.setVisible(visible);
     }
 
     private Player validateUser(String username, String password) {

@@ -44,4 +44,12 @@ public class MainMenu {
         frame.pack();
         frame.setVisible(true);
     }
+
+    public void setVisible(boolean visible) {
+        JFrame frame = new JFrame("Main Menu");
+        frame.setContentPane(this.mainPanel);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(visible);
+    }
 }

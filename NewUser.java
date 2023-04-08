@@ -186,7 +186,7 @@ public class NewUser {
         frame.setContentPane(this.panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
-        frame.setVisible(true);
+        frame.setVisible(visible);
     }
 }
 
