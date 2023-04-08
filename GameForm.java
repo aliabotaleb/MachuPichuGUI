@@ -5,11 +5,10 @@ import java.util.ArrayList;
 
 public class GameForm {
     private JPanel panel1;
-    private JLabel diceRollLabel1;
-    private JTextField textField1;
     private JButton rollDiceButton;
     private JButton newGameButton;
     private JButton saveGameButton;
+    private JLabel rollsLabelField;
     private JLabel scoreLabelField;
     private JLabel statusLabelField;
     private JLabel highScoreLabelField;
@@ -25,7 +24,7 @@ public class GameForm {
         setUserNameLabelField(player.getName());
         setHighScoreLabelField(String.valueOf(player.getHighScore()));
 
-        setGameStatusLabelField("Roll dice to start the game");
+        setGameStatusLabelField("Waiting for game to start");
         setScoreLabelField(String.valueOf(player.getScore()));
          // Add ActionListener to the rollDiceButton
          rollDiceButton.addActionListener(new ActionListener() {
@@ -59,7 +58,7 @@ public class GameForm {
         }
         String concatenatedDiceList = sb.toString();
 
-        setTextField1(concatenatedDiceList);
+        setrollsLabelField(concatenatedDiceList);
 
         GameLogic.checkMachuPichu(diceList, this.player);
         setGameStatusLabelField(player.getStatusStr());
@@ -75,7 +74,8 @@ public class GameForm {
     public void handleNewGame() {
         player.resetScore();
         setScoreLabelField(String.valueOf(player.getScore()));
-        setGameStatusLabelField("Roll dice to start the game");
+        setGameStatusLabelField("Waiting for game to start");
+        setrollsLabelField("Roll dice to start the game");
     }
 
     public void handleSaveGame() {
@@ -84,8 +84,8 @@ public class GameForm {
         Players.writePlayerDataToFile(this.player, players);
     }
 
-    private void setTextField1(String text) {
-        textField1.setText(text);
+    private void setrollsLabelField(String text) {
+        rollsLabelField.setText(text);
     }
 
     private void setGameStatusLabelField(String text) {
