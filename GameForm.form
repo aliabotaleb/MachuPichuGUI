@@ -74,7 +74,7 @@
               <text value="Game Status:"/>
             </properties>
           </component>
-          <component id="5e3f1" class="javax.swing.JTextArea" binding="example2TextArea">
+          <component id="5e3f1" class="javax.swing.JTextArea" binding="gameStatusTextArea">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
@@ -110,7 +110,7 @@
               </component>
             </children>
           </grid>
-          <component id="2af5a" class="javax.swing.JTextArea" binding="example1TextArea" default-binding="true">
+          <component id="2af5a" class="javax.swing.JTextArea" binding="highScoreTextArea">
             <constraints>
               <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
@@ -130,7 +130,7 @@
           <text value="Score:"/>
         </properties>
       </component>
-      <component id="8f204" class="javax.swing.JTextArea" binding="example3TextArea" default-binding="true">
+      <component id="8f204" class="javax.swing.JTextArea" binding="scoreTextArea">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="10" height="10"/>
