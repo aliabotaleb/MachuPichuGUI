@@ -40,7 +40,7 @@ public class ExistingUser {
 
                 if (isValidUser) {
                     // Launch the game form
-                GameForm gameForm = new GameForm();
+                GameForm gameForm = new GameForm(new Player("ali,0"));
                     gameForm.setVisible(true);
                 } else {
                     int option = JOptionPane.showConfirmDialog(null,

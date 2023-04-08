@@ -51,7 +51,7 @@ public class NewUser {
 
                     JOptionPane.showMessageDialog(null, "User created successfully!");
                     // Launch the game form
-                    GameForm gameForm = new GameForm(username,0);
+                    GameForm gameForm = new GameForm(new Player("ali,0"));
                     gameForm.setVisible(true);
                 }
             }
