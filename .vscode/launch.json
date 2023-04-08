@@ -1,0 +1,59 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "ExistingUser",
+      "request": "launch",
+      "mainClass": "ExistingUser",
+      "projectName": "MachuPichuGUI_4096b007"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "MachuPichuGUI_4096b007"
+    },
+    {
+      "type": "java",
+      "name": "MainMenu",
+      "request": "launch",
+      "mainClass": "MainMenu",
+      "projectName": "MachuPichuGUI_4096b007"
+    },
+    {
+      "type": "java",
+      "name": "NewUser",
+      "request": "launch",
+      "mainClass": "NewUser",
+      "projectName": "MachuPichuGUI_4096b007"
+    },
+    {
+      "type": "java",
+      "name": "Tests",
+      "request": "launch",
+      "mainClass": "Tests",
+      "projectName": "MachuPichuGUI_4096b007"
+    },
+    {
+      "type": "java",
+      "name": "MachuPichuGUIII",
+      "request": "launch",
+      "mainClass": "MainMenu",
+      "projectName": "MachuPichuGUI_4096b007",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "vmArgs": "-cp \"D:\\Coding_Projects\\MachuPichuGUI\\src\\out\\production\\MachuPichu\" -javaagent:\"C:\\Program Files\\JetBrains\\IntelliJ IDEA\\lib\\idea_rt.jar=51790:C:\\Program Files\\JetBrains\\IntelliJ IDEA\\bin\" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8"
+    }
+  ]
+}
